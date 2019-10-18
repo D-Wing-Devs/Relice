@@ -8,32 +8,46 @@ import { thisExpression } from '@babel/types';
 class RegisterComplaint extends Component {
 
 	state = {
-		image_file : null,
+		selectedImage : null,
 		name : "",
 		location : "",
 		age : 0,
 		color : "",
 		height : 0,
-		sex : ""
+		sex : "",
+		alert: false
 	}
 
 	handleFileChange = (event) => {
 		console.log(event.currentTarget.files[0]);
-		this.setState({image_file : event.currentTarget.files[0]});
+		this.setState({ selectedImage: URL.createObjectURL(event.currentTarget.files[0])});
 		// this.props.selectImage(URL.createObjectURL(event.currentTarget.files[0]));
 	};
+
+	componentWillUnmount = () => {
+		console.log(this.state);
+		//todo:save to store here for 
+	}
+
+	componentDidMount = () => {
+		//todo : get data from store and set it to the local state
+	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
 		//todo : upload the image
 		//todo : get the image url
 		//todo : save the data to the db
-	}
-
-	componentWillUnmount = () => {
-		console.log(this.state);
-		//todo:save to store here
-	}
+		if (this.props.selectedImage === null) {
+			this.setState({
+				alert: true
+			});
+		} else {
+			this.setState({
+				alert: false
+			});
+		}
+	};
 
 	render() {
 		return (
@@ -46,31 +60,44 @@ class RegisterComplaint extends Component {
 						</div>
 					}
 				/>
-				<div className="header text-center" style={{ margin: '2% auto' }}>
-					<img
-						src={this.props.selectedImage ? this.props.selectedImage : defaultImage}
-						alt="uploaded-image"
-						style={{ height: '200px', width: '200px' }}
-					/>
-					<input
-						required
-						type="file"
-						onChange={this.handleFileChange}
-						ref={(input) => (this.inputElement = input)}
-						style={{ display: 'none' }}
-					/>
-					<div className="form-group form-control" style={{ border: 'none' }}>
-						<button
-							className="btn btn-primary"
-							onClick={(e) => {
-								e.preventDefault();
-								this.inputElement.click();
+				<form>
+					<div className="header text-center" style={{ margin: '2% auto' }}>
+						<img
+							src={this.state.selectedImage ? this.state.selectedImage : defaultImage}
+							alt="uploaded-image"
+							style={{ height: '200px', width: '200px' }}
+						/>
+						<div
+							class="alert alert-danger"
+							role="alert"
+							style={{
+								width: '20%',
+								fontSize: '13px',
+								margin: '2% auto',
+								display: this.state.alert ? 'block' : 'none'
 							}}
 						>
-							<p style={{ margin: '0', padding: '0' }}>Pick an Image</p>
-						</button>
-					</div>
-					<form onSubmit={this.handleSubmit}>
+							Please Upload the Image
+						</div>
+						<input
+							type="file"
+							onChange={this.handleFileChange}
+							ref={(input) => (this.inputElement = input)}
+							style={{ display: 'none' }}
+							required
+						/>
+						<div className="form-group form-control" style={{ border: 'none' }}>
+							<button
+								className="btn btn-primary"
+								onClick={(e) => {
+									e.preventDefault();
+									this.inputElement.click();
+								}}
+							>
+								<p style={{ margin: '0', padding: '0' }}>Pick an Image</p>
+							</button>
+						</div>
+
 						<div
 							className="form-group form-control"
 							style={{ background: 'white', padding: '3%', width: '75%', margin: '0 auto' }}
@@ -92,7 +119,6 @@ class RegisterComplaint extends Component {
 										placeholder="Name"
 										value = {this.state.name}
 										onChange = {e => this.setState({name : e.target.value})}
-								
 									/>
 								</div>
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
@@ -206,9 +232,11 @@ class RegisterComplaint extends Component {
 								</div>
 							</div>
 						</div>
-						<input type="submit"/>
-					</form>
-				</div>
+						<button className="btn btn-info" onClick={this.handleSubmit}>
+							Submit
+						</button>
+					</div>
+				</form>
 			</Fragment>
 		);
 	}
