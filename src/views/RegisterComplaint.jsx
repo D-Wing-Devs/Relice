@@ -49,15 +49,15 @@ class RegisterComplaint extends Component {
 							<p style={{ margin: '0', padding: '0' }}>Pick an Image</p>
 						</button>
 					</div>
-					<form>
+					<form onSubmit={this.handleSubmit}>
 						<div
 							className="form-group form-control"
 							style={{ background: 'white', padding: '3%', width: '75%', margin: '0 auto' }}
 						>
 							<div className="form-group row">
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
-										First Name
+										Name
 									</header>
 								</label>
 								<div className="col">
@@ -67,13 +67,14 @@ class RegisterComplaint extends Component {
 										type="text"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
-										name="firstname"
-										placeholder="First name"
+										name="name"
+										placeholder="Name"
+								
 									/>
 								</div>
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
-										Last Name
+										Location
 									</header>
 								</label>
 								<div className="col">
@@ -83,13 +84,13 @@ class RegisterComplaint extends Component {
 										type="text"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
-										name="lastname"
-										placeholder="Last name"
+										name="location"
+										placeholder="Last seen location"
 									/>
 								</div>
 							</div>
 							<div className="form-group row">
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
 										Age
 									</header>
@@ -107,7 +108,7 @@ class RegisterComplaint extends Component {
 										placeholder="Age (years)"
 									/>
 								</div>
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
 										Height
 									</header>
@@ -120,12 +121,12 @@ class RegisterComplaint extends Component {
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
 										name="height"
-										placeholder="Height (ft)"
+										placeholder="Height (cm)"
 									/>
 								</div>
 							</div>
 							<div className="form-group row">
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
 										Color
 									</header>
@@ -148,23 +149,23 @@ class RegisterComplaint extends Component {
 										<option value="Brown/dark brown" />
 									</datalist>
 								</div>
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
-										Gender
+										Sex
 									</header>
 								</label>
 								<div className="col">
 									<input
 										required
 										style={{ background: 'white' }}
-										type="gender"
+										type="sex"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
-										name="gender"
-										placeholder="Gender"
-										list="genderList"
+										name="sex"
+										placeholder="Sex"
+										list="sexList"
 									/>
-									<datalist id="genderList">
+									<datalist id="sexList">
 										<option value="Male" />
 										<option value="Female" />
 										<option value="Other" />
@@ -172,6 +173,7 @@ class RegisterComplaint extends Component {
 								</div>
 							</div>
 						</div>
+						<input type="submit"/>
 					</form>
 				</div>
 			</Fragment>
