@@ -1,17 +1,13 @@
 import React, { Fragment, Component } from 'react';
 import PanelHeader from 'components/PanelHeader/PanelHeader.jsx';
 import defaultImage from '../assets/img/avatar.png';
+import { selectImage } from '../actions';
+import { connect } from 'react-redux';
 
 class RegisterComplaint extends Component {
-	state = {
-		selectedFile: null
-	};
-
 	handleFileChange = (event) => {
 		console.log(event.currentTarget.files[0]);
-		this.setState({
-			selectedFile: URL.createObjectURL(event.currentTarget.files[0])
-		});
+		this.props.selectImage(URL.createObjectURL(event.currentTarget.files[0]));
 	};
 
 	render() {
@@ -27,7 +23,7 @@ class RegisterComplaint extends Component {
 				/>
 				<div className="header text-center" style={{ margin: '2% auto' }}>
 					<img
-						src={this.state.selectedFile ? this.state.selectedFile : defaultImage}
+						src={this.props.selectedImage ? this.props.selectedImage : defaultImage}
 						alt="uploaded-image"
 						style={{ height: '200px', width: '200px' }}
 					/>
@@ -181,4 +177,10 @@ class RegisterComplaint extends Component {
 	}
 }
 
-export default RegisterComplaint;
+const mapStateToProps = (state) => {
+	return {
+		selectedImage: state.selectedImage
+	};
+};
+
+export default connect(mapStateToProps, { selectImage })(RegisterComplaint);
