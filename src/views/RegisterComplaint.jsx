@@ -3,12 +3,37 @@ import PanelHeader from 'components/PanelHeader/PanelHeader.jsx';
 import defaultImage from '../assets/img/avatar.png';
 import { selectImage } from '../actions';
 import { connect } from 'react-redux';
+import { thisExpression } from '@babel/types';
 
 class RegisterComplaint extends Component {
+
+	state = {
+		image_file : null,
+		name : "",
+		location : "",
+		age : 0,
+		color : "",
+		height : 0,
+		sex : ""
+	}
+
 	handleFileChange = (event) => {
 		console.log(event.currentTarget.files[0]);
-		this.props.selectImage(URL.createObjectURL(event.currentTarget.files[0]));
+		this.setState({image_file : event.currentTarget.files[0]});
+		// this.props.selectImage(URL.createObjectURL(event.currentTarget.files[0]));
 	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		//todo : upload the image
+		//todo : get the image url
+		//todo : save the data to the db
+	}
+
+	componentWillUnmount = () => {
+		console.log(this.state);
+		//todo:save to store here
+	}
 
 	render() {
 		return (
@@ -65,6 +90,8 @@ class RegisterComplaint extends Component {
 										id="colFormLabelSm"
 										name="name"
 										placeholder="Name"
+										value = {this.state.name}
+										onChange = {e => this.setState({name : e.target.value})}
 								
 									/>
 								</div>
@@ -82,6 +109,8 @@ class RegisterComplaint extends Component {
 										id="colFormLabelSm"
 										name="location"
 										placeholder="Last seen location"
+										value={this.state.location}
+										onChange={e => this.setState({ location: e.target.value })}
 									/>
 								</div>
 							</div>
@@ -102,6 +131,8 @@ class RegisterComplaint extends Component {
 										min="0"
 										max="100"
 										placeholder="Age (years)"
+										value={this.state.age}
+										onChange={e => this.setState({ age: e.target.value })}
 									/>
 								</div>
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
@@ -118,6 +149,8 @@ class RegisterComplaint extends Component {
 										id="colFormLabelSm"
 										name="height"
 										placeholder="Height (cm)"
+										value={this.state.height}
+										onChange={e => this.setState({ height: e.target.value })}
 									/>
 								</div>
 							</div>
@@ -137,6 +170,8 @@ class RegisterComplaint extends Component {
 										name="height"
 										placeholder="Color"
 										list="colorsList"
+										value={this.state.color}
+										onChange={e => this.setState({ color: e.target.value })}
 									/>
 									<datalist id="colorsList">
 										<option value="White/Fair" />
@@ -160,6 +195,8 @@ class RegisterComplaint extends Component {
 										name="sex"
 										placeholder="Sex"
 										list="sexList"
+										value={this.state.sex}
+										onChange={e => this.setState({ sex: e.target.value })}
 									/>
 									<datalist id="sexList">
 										<option value="Male" />
