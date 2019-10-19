@@ -1,21 +1,5 @@
-/*!
 
-=========================================================
-* Now UI Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
+import React, {Fragment, Component} from "react";
 
 // reactstrap components
 import {
@@ -33,26 +17,26 @@ import {
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
-class User extends React.Component {
+class User extends Component {
   render() {
     return (
-      <>
+      <Fragment>
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
             <Col md="8">
               <Card>
                 <CardHeader>
-                  <h5 className="title">Edit Profile</h5>
+                  <h5 className="title">Administrator Profile</h5>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>Company (disabled)</label>
+                          <label>Position</label>
                           <Input
-                            defaultValue="Creative Code Inc."
+                            defaultValue="Sub Inspector"
                             disabled
                             placeholder="Company"
                             type="text"
@@ -216,7 +200,7 @@ class User extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+      </Fragment>
     );
   }
 }

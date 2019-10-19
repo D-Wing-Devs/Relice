@@ -6,32 +6,32 @@ import { connect } from 'react-redux';
 import { thisExpression } from '@babel/types';
 
 class RegisterComplaint extends Component {
-
 	state = {
-		selectedImage : null,
-		name : "",
-		location : "",
-		age : 0,
-		color : "",
-		height : 0,
-		sex : "",
-		alert: false
-	}
+		selectedImage: null,
+		name: '',
+		location: '',
+		age: 0,
+		skinColor: '',
+		height: 0,
+		sex: '',
+		alert: false,
+		hairColor: false
+	};
 
 	handleFileChange = (event) => {
 		console.log(event.currentTarget.files[0]);
-		this.setState({ selectedImage: URL.createObjectURL(event.currentTarget.files[0])});
+		this.setState({ selectedImage: URL.createObjectURL(event.currentTarget.files[0]) });
 		// this.props.selectImage(URL.createObjectURL(event.currentTarget.files[0]));
 	};
 
 	componentWillUnmount = () => {
 		console.log(this.state);
-		//todo:save to store here for 
-	}
+		//todo:save to store here for
+	};
 
 	componentDidMount = () => {
 		//todo : get data from store and set it to the local state
-	}
+	};
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -117,8 +117,8 @@ class RegisterComplaint extends Component {
 										id="colFormLabelSm"
 										name="name"
 										placeholder="Name"
-										value = {this.state.name}
-										onChange = {e => this.setState({name : e.target.value})}
+										value={this.state.name}
+										onChange={(e) => this.setState({ name: e.target.value })}
 									/>
 								</div>
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
@@ -136,7 +136,7 @@ class RegisterComplaint extends Component {
 										name="location"
 										placeholder="Last seen location"
 										value={this.state.location}
-										onChange={e => this.setState({ location: e.target.value })}
+										onChange={(e) => this.setState({ location: e.target.value })}
 									/>
 								</div>
 							</div>
@@ -158,7 +158,7 @@ class RegisterComplaint extends Component {
 										max="100"
 										placeholder="Age (years)"
 										value={this.state.age}
-										onChange={e => this.setState({ age: e.target.value })}
+										onChange={(e) => this.setState({ age: e.target.value })}
 									/>
 								</div>
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
@@ -176,7 +176,7 @@ class RegisterComplaint extends Component {
 										name="height"
 										placeholder="Height (cm)"
 										value={this.state.height}
-										onChange={e => this.setState({ height: e.target.value })}
+										onChange={(e) => this.setState({ height: e.target.value })}
 									/>
 								</div>
 							</div>
@@ -193,11 +193,11 @@ class RegisterComplaint extends Component {
 										type="text"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
-										name="height"
-										placeholder="Color"
-										list="colorsList"
-										value={this.state.color}
-										onChange={e => this.setState({ color: e.target.value })}
+										name="skin-color"
+										placeholder="Skin Color"
+										list="skinColorsList"
+										value={this.state.skinColor}
+										onChange={(e) => this.setState({ skinColor: e.target.value })}
 									/>
 									<datalist id="colorsList">
 										<option value="White/Fair" />
@@ -222,12 +222,32 @@ class RegisterComplaint extends Component {
 										placeholder="Sex"
 										list="sexList"
 										value={this.state.sex}
-										onChange={e => this.setState({ sex: e.target.value })}
+										onChange={(e) => this.setState({ sex: e.target.value })}
 									/>
 									<datalist id="sexList">
 										<option value="Male" />
 										<option value="Female" />
 										<option value="Other" />
+									</datalist>
+								</div>
+								<div className="col">
+									<input
+										required
+										style={{ background: 'white' }}
+										type="text"
+										className="form-control form-control-sm"
+										id="colFormLabelSm"
+										name="hair-color"
+										placeholder="Hair Color"
+										list="hairColorList"
+										value={this.state.hairColor}
+										onChange={(e) => this.setState({ hairColor: e.target.value })}
+									/>
+									<datalist id="hairColorList">
+										<option value="Blonde" />
+										<option value="Brunette" />
+										<option value="Red" />
+										<option value="Black" />
 									</datalist>
 								</div>
 							</div>
