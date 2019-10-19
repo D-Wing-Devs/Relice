@@ -3,7 +3,7 @@
 Within the download you'll find the following directories and files:
 
 ```
-ReUnite
+ReLice
 ├── CHANGELOG.md
 ├── Documentation
 │   └── tutorial-components.html
