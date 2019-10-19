@@ -1,21 +1,23 @@
 import React, { Fragment, Component } from 'react';
 import PanelHeader from 'components/PanelHeader/PanelHeader.jsx';
 import defaultImage from '../assets/img/avatar.png';
-import { selectImage } from '../actions';
+import { selectImage, saveState } from '../actions';
 import { connect } from 'react-redux';
 import { thisExpression } from '@babel/types';
 
 class RegisterComplaint extends Component {
 	state = {
 		selectedImage: null,
-		name: '',
+		victimName: '',
+		complainantName: '',
 		location: '',
 		age: 0,
 		skinColor: '',
 		height: 0,
 		sex: '',
 		alert: false,
-		hairColor: false
+		hairColor: '',
+		phone: null
 	};
 
 	handleFileChange = (event) => {
@@ -25,12 +27,38 @@ class RegisterComplaint extends Component {
 	};
 
 	componentWillUnmount = () => {
-		console.log(this.state);
+		this.props.saveState(this.state);
 		//todo:save to store here for
 	};
 
 	componentDidMount = () => {
-		//todo : get data from store and set it to the local state
+		const {
+			selectedImage,
+			victimName,
+			complainantName,
+			location,
+			age,
+			skinColor,
+			height,
+			sex,
+			alert,
+			hairColor,
+			phone
+		} = this.props.state;
+		this.setState({
+			selectedImage,
+			victimName,
+			complainantName,
+			location,
+			age,
+			skinColor,
+			height,
+			sex,
+			alert,
+			hairColor,
+			phone
+		});
+		console.log(this.state);
 	};
 
 	handleSubmit = (event) => {
@@ -97,11 +125,13 @@ class RegisterComplaint extends Component {
 								<p style={{ margin: '0', padding: '0' }}>Pick an Image</p>
 							</button>
 						</div>
-
 						<div
 							className="form-group form-control"
 							style={{ background: 'white', padding: '3%', width: '75%', margin: '0 auto' }}
 						>
+							<header style={{ margin: '5%', marginTop: '0', color: '#787878', fontWeight: '800' }}>
+								Victim Details
+							</header>
 							<div className="form-group row">
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
@@ -115,10 +145,10 @@ class RegisterComplaint extends Component {
 										type="text"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
-										name="name"
+										name="victim-name"
 										placeholder="Name"
-										value={this.state.name}
-										onChange={(e) => this.setState({ name: e.target.value })}
+										value={this.state.victimName}
+										onChange={(e) => this.setState({ victimName: e.target.value })}
 									/>
 								</div>
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
@@ -183,7 +213,7 @@ class RegisterComplaint extends Component {
 							<div className="form-group row">
 								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
 									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
-										Color
+										Skin Color
 									</header>
 								</label>
 								<div className="col">
@@ -199,7 +229,7 @@ class RegisterComplaint extends Component {
 										value={this.state.skinColor}
 										onChange={(e) => this.setState({ skinColor: e.target.value })}
 									/>
-									<datalist id="colorsList">
+									<datalist id="skinColorsList">
 										<option value="White/Fair" />
 										<option value="Medium/White to light brown" />
 										<option value="Olive/moderate brown" />
@@ -230,10 +260,17 @@ class RegisterComplaint extends Component {
 										<option value="Other" />
 									</datalist>
 								</div>
+							</div>
+							<div className="form-group row">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
+									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
+										Hair Color
+									</header>
+								</label>
 								<div className="col">
 									<input
 										required
-										style={{ background: 'white' }}
+										style={{ background: 'white', width: '38%' }}
 										type="text"
 										className="form-control form-control-sm"
 										id="colFormLabelSm"
@@ -251,6 +288,47 @@ class RegisterComplaint extends Component {
 									</datalist>
 								</div>
 							</div>
+							<header style={{ margin: '5%', color: '#787878', fontWeight: '800' }}>
+								Complainant Details
+							</header>
+							<div className="form-group row">
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
+									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
+										Full Name
+									</header>
+								</label>
+								<div className="col">
+									<input
+										required
+										style={{ background: 'white' }}
+										type="text"
+										className="form-control form-control-sm"
+										id="colFormLabelSm"
+										name="complainant-name"
+										placeholder="Enter Complainant Name"
+										value={this.state.complainantName}
+										onChange={(e) => this.setState({ complainantName: e.target.value })}
+									/>
+								</div>
+								<label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
+									<header style={{ fontSize: '12px', fontWeight: '800', color: '#615b5b' }}>
+										Phone Number
+									</header>
+								</label>
+								<div className="col">
+									<input
+										required
+										style={{ background: 'white' }}
+										type="number"
+										className="form-control form-control-sm"
+										id="colFormLabelSm"
+										name="phone"
+										placeholder="Enter Phone Number"
+										value={this.state.phone}
+										onChange={(e) => this.setState({ phone: e.target.value })}
+									/>
+								</div>
+							</div>
 						</div>
 						<button className="btn btn-info" onClick={this.handleSubmit}>
 							Submit
@@ -264,8 +342,9 @@ class RegisterComplaint extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		selectedImage: state.selectedImage
+		selectedImage: state.selectedImage,
+		state: state.state
 	};
 };
 
-export default connect(mapStateToProps, { selectImage })(RegisterComplaint);
+export default connect(mapStateToProps, { selectImage, saveState })(RegisterComplaint);
