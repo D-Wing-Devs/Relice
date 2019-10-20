@@ -130,8 +130,7 @@ class User extends Component {
                           <label>About Me</label>
                           <Input
                             cols="80"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
+                            defaultValue=""
                             placeholder="Here can be your description"
                             rows="4"
                             type="textarea"

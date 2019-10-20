@@ -5,6 +5,7 @@
 	"private": true,
 	"homepage": "https://demos.creative-tim.com/now-ui-dashboard-react/#/",
 	"dependencies": {
+		"axios": "^0.19.0",
 		"bootstrap": "4.3.1",
 		"chart.js": "2.8.0",
 		"firebase": "^7.2.1",
@@ -42,8 +43,16 @@
 		"typescript": "3.5.1"
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"engines": {
 		"node": "8.11"

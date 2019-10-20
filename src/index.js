@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'assets/scss/now-ui-dashboard.scss?v1.2.0';
 import 'assets/css/demo.css';
 
+import LoginPage from './layouts/LoginPage';
 import AdminLayout from 'layouts/Admin.jsx';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,6 +22,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router history={hist}>
 			<Switch>
+				<Route path="/" component={LoginPage} />
 				<Route path="/admin" render={(props) => <AdminLayout {...props} />} />
 				<Redirect to="/admin/dashboard" />
 			</Switch>
