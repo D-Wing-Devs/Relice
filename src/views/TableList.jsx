@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader.jsx';
@@ -36,18 +37,25 @@ class RegularTables extends Component {
 											</tr>
 										</thead>
 										<tbody>
-											{tbody.map((prop, key) => {
+											{this.props.complaints.map((prop, key) => {
 												return (
 													<tr key={key}>
-														{prop.data.map((prop, key) => {
+														<td key={key}>{prop.victim_name}</td>
+														<td key={key}>{prop.age}</td>
+														<td key={key}>{prop.location}</td>
+														<td key={key} className="text-right">
+															{prop.height}
+														</td>
+														{/* {prop.data.map((prop, key) => {
 															if (key === thead.length - 1)
 																return (
 																	<td key={key} className="text-right">
 																		{prop}
 																	</td>
 																);
+
 															return <td key={key}>{prop}</td>;
-														})}
+														})} */}
 													</tr>
 												);
 											})}
@@ -63,4 +71,10 @@ class RegularTables extends Component {
 	}
 }
 
-export default RegularTables;
+const mapStateToProps = (state) => {
+	return {
+		complaints: state.complaints
+	};
+};
+
+export default connect(mapStateToProps)(RegularTables);

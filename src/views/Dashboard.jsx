@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 // react plugin used to create charts
 import { Line, Bar } from 'react-chartjs-2';
+import { connect } from 'react-redux';
+import './dashboard.css';
 
 // reactstrap components
 import {
@@ -39,20 +41,6 @@ class Dashboard extends React.Component {
 								<CardHeader>
 									<h5 className="card-category">National Analysis</h5>
 									<CardTitle tag="h4">Public Engagement</CardTitle>
-									<UncontrolledDropdown>
-										<DropdownToggle
-											className="btn-round btn-outline-default btn-icon"
-											color="default"
-										>
-											<i className="now-ui-icons loader_gear" />
-										</DropdownToggle>
-										<DropdownMenu right>
-											<DropdownItem>Action</DropdownItem>
-											<DropdownItem>Another Action</DropdownItem>
-											<DropdownItem>Something else here</DropdownItem>
-											<DropdownItem className="text-danger">Remove data</DropdownItem>
-										</DropdownMenu>
-									</UncontrolledDropdown>
 								</CardHeader>
 								<CardBody>
 									<div className="chart-area">
@@ -63,7 +51,7 @@ class Dashboard extends React.Component {
 									<div className="stats">
 										<i
 											className="now-ui-icons arrows-1_refresh-69"
-											style={{ marginTop: '13%' }}
+											style={{ marginTop: '30%' }}
 										/>{' '}
 										Just Updated
 									</div>
@@ -93,11 +81,17 @@ class Dashboard extends React.Component {
 											</tr>
 										</thead>
 										<tbody>
-											{tbody.map((prop, key) => {
+											{this.props.complaints.map((prop, key) => {
 												if (key > 4) return;
 												return (
 													<tr key={key}>
-														{prop.data.map((prop, key) => {
+														<td key={key}>{prop.victim_name}</td>
+														<td key={key}>{prop.age}</td>
+														<td key={key}>{prop.location}</td>
+														<td key={key} className="text-right">
+															{prop.height}
+														</td>
+														{/* {prop.data.map((prop, key) => {
 															if (key === thead.length - 1)
 																return (
 																	<td key={key} className="text-right">
@@ -106,13 +100,24 @@ class Dashboard extends React.Component {
 																);
 
 															return <td key={key}>{prop}</td>;
-														})}
+														})} */}
 													</tr>
 												);
 											})}
 										</tbody>
 									</Table>
 								</CardBody>
+								<CardFooter>
+									<div
+										className="stats see-more"
+										onClick={() => {
+											this.props.history.push('/admin/extended-tables');
+										}}
+									>
+										<i className="now-ui-icons ui-1_simple-add" style={{ marginTop: '13%' }} /> See
+										More
+									</div>
+								</CardFooter>
 							</Card>
 						</Col>
 					</Row>
@@ -122,4 +127,11 @@ class Dashboard extends React.Component {
 	}
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+	console.log(state.complaints);
+	return {
+		complaints: state.complaints
+	};
+};
+
+export default connect(mapStateToProps)(Dashboard);

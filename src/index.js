@@ -22,7 +22,10 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router history={hist}>
 			<Switch>
+<<<<<<< HEAD
 				{/* // <Route path="/" component={LoginPage} /> */}
+=======
+>>>>>>> e3d316aac3af06a4669f8c9ea4cc41fe2d5397b4
 				<Route path="/admin" render={(props) => <AdminLayout {...props} />} />
 				<Redirect to="/admin/dashboard" />
 			</Switch>
