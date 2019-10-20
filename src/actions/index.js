@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export const setComplaints = (data) => (dispatch) => {
+	dispatch({ type: 'SET_COMPLAINTS', payload: data });
+};
+
 export const saveState = (state) => (dispatch) => {
 	dispatch({ type: 'SAVE_STATE', payload: state });
 };

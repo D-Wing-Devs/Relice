@@ -110,8 +110,10 @@ class RegisterComplaint extends Component {
 					console.log(res.data);
 					if (res.data.error) {
 						console.log(res.data.error);
-					} else if (res.data.matched_id !== undefined) {
+					} else if (res.data.is_matched) {
 						alert('Match Found');
+					} else {
+						console.log('no match found');
 					}
 				});
 		}

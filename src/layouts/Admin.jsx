@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { setComplaints } from '../actions';
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from 'perfect-scrollbar';
 
@@ -19,11 +22,14 @@ class Dashboard extends React.Component {
 		backgroundColor: 'blue'
 	};
 	mainPanel = React.createRef();
-	componentDidMount() {
+	async componentDidMount() {
 		if (navigator.platform.indexOf('Win') > -1) {
 			ps = new PerfectScrollbar(this.mainPanel.current);
 			document.body.classList.toggle('perfect-scrollbar-on');
 		}
+
+		const response = await axios.get('https://reliceapi.azurewebsites.net/api/get/complaints');
+		this.props.setComplaints(response.data);
 	}
 	componentWillUnmount() {
 		if (navigator.platform.indexOf('Win') > -1) {
@@ -59,4 +65,4 @@ class Dashboard extends React.Component {
 	}
 }
 
-export default Dashboard;
+export default connect(null, { setComplaints })(Dashboard);
