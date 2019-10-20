@@ -47,7 +47,7 @@ class User extends Component {
                         <FormGroup>
                           <label>Username</label>
                           <Input
-                            defaultValue="michael23"
+                            defaultValue="shinde_mah"
                             placeholder="Username"
                             type="text"
                           />
@@ -67,7 +67,7 @@ class User extends Component {
                         <FormGroup>
                           <label>First Name</label>
                           <Input
-                            defaultValue="Mike"
+                            defaultValue="Mahesh"
                             placeholder="Company"
                             type="text"
                           />
@@ -77,7 +77,7 @@ class User extends Component {
                         <FormGroup>
                           <label>Last Name</label>
                           <Input
-                            defaultValue="Andrew"
+                            defaultValue="Shinde"
                             placeholder="Last Name"
                             type="text"
                           />
@@ -101,7 +101,7 @@ class User extends Component {
                         <FormGroup>
                           <label>City</label>
                           <Input
-                            defaultValue="Mike"
+                            defaultValue="Mumbai"
                             placeholder="City"
                             type="text"
                           />
@@ -111,7 +111,7 @@ class User extends Component {
                         <FormGroup>
                           <label>Country</label>
                           <Input
-                            defaultValue="Andrew"
+                            defaultValue="India"
                             placeholder="Country"
                             type="text"
                           />
@@ -153,16 +153,15 @@ class User extends Component {
                       <img
                         alt="..."
                         className="avatar border-gray"
-                        src={require("assets/img/mike.jpg")}
+                        src={require("assets/img/default-avatar.png")}
                       />
-                      <h5 className="title">Mike Andrew</h5>
+                      <h5 className="title">Inspector shinde</h5>
                     </a>
-                    <p className="description">michael24</p>
+                    <p className="description">@sinde_mah</p>
                   </div>
                   <p className="description text-center">
-                    "Lamborghini Mercy <br />
-                    Your chick she so thirsty <br />
-                    I'm in that two seat Lambo"
+                    Jai hind!<br/>
+                    Jai Bharat!!
                   </p>
                 </CardBody>
                 <hr />

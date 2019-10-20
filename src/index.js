@@ -22,7 +22,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router history={hist}>
 			<Switch>
-				<Route path="/" component={LoginPage} />
+				{/* // <Route path="/" component={LoginPage} /> */}
 				<Route path="/admin" render={(props) => <AdminLayout {...props} />} />
 				<Redirect to="/admin/dashboard" />
 			</Switch>

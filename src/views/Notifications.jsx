@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from 'react-notification-alert';
+import axios from 'axios';
 
 // reactstrap components
 import { Alert, Card, CardTitle, CardBody, CardHeader, Row, Col, Button } from 'reactstrap';
@@ -8,21 +9,23 @@ import { Alert, Card, CardTitle, CardBody, CardHeader, Row, Col, Button } from '
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader.jsx';
 
-const colors = [ 'primary', 'success', 'danger', 'warning', 'info' ];
-const notifications = [
-	'Possible match found. Location : Jodhpur, Rajasthan',
-	'Possible match found. Location : Bangalore, Karnatak',
-	'Possible match found. Location : Mumbai, Maharashtra',
-	'Possible match found. Location : Pune, Maharashtra',
-	'Possible match found. Location : Hyderabad, Telangana',
-	'Possible match found. Location : Lucknow, UP'
-];
+// const colors = [ 'primary', 'success', 'danger', 'warning', 'info' ];
+// const notifications = [
+// 	'Possible match found. Location : Jodhpur, Rajasthan',
+// 	'Possible match found. Location : Bangalore, Karnatak',
+// 	'Possible match found. Location : Mumbai, Maharashtra',
+// 	'Possible match found. Location : Pune, Maharashtra',
+// 	'Possible match found. Location : Hyderabad, Telangana',
+// 	'Possible match found. Location : Lucknow, UP'
+// ];
 
 class Notifications extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: true
+			visible: true,
+			notifications : [],
+			colors  :['primary', 'success', 'danger', 'warning', 'info']
 		};
 		this.onDismiss = this.onDismiss.bind(this);
 		this.notify = this.notify.bind(this);
@@ -67,6 +70,13 @@ class Notifications extends Component {
 		};
 		this.refs.notificationAlert.notificationAlert(options);
 	}
+	
+	componentDidMount = async() => {
+		const matched_response = await axios.get("https://reliceapi.azurewebsites.net/api/get/matched");
+		const matched = matched_response.data;
+		this.setState({notifications : [...matched]});
+	}
+
 	render() {
 		return (
 			<Fragment>
@@ -87,10 +97,10 @@ class Notifications extends Component {
 									<CardTitle tag="h4">Notifications</CardTitle>
 								</CardHeader>
 								<CardBody>
-									{notifications.map((notification, index) => {
+									{this.state.notifications.map((notification, index) => {
 										return (
-											<Alert className="btn" color={colors[index % 5]} style={{ width: '100%' }}>
-												<span>{notification}</span>
+											<Alert className="btn" color={this.state.colors[index % 5]} style={{ width: '100%' }}>
+												<span>{notification.victim_name} is matched!</span>
 											</Alert>
 										);
 									})}
